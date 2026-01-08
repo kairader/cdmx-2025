@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#E8E3D7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>CDMX — Jan 2025</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #E8E3D7;
+      --cream-dark: #DDD8CC;
+      --terracotta: #C4492B;
+      --terracotta-light: #D4593B;
+      --black: #1A1A1A;
+      --gray: #6B6B6B;
+      --gray-light: #9A9A9A;
+      --green: #2B8C4B;
+      --amber: #C4862B;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      background: var(--cream);
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--black);
+      min-height: 100vh;
+      min-height: 100dvh;
+      line-height: 1.5;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+    }
+
+    /* Header */
+    header {
+      padding: 1.5rem 1.25rem 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.25rem;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .hotel-link {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--terracotta);
+      text-decoration: none;
+      padding: 0.5rem;
+      margin: -0.5rem;
+    }
+
+    .dates {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray);
+    }
+
+    /* Tab Navigation */
+    nav {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0.25rem;
+      padding: 0 1.25rem;
+      min-width: max-content;
+    }
+
+    .tab {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.75rem 1rem;
+      background: transparent;
+      border: none;
+      color: var(--gray);
+      cursor: pointer;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tab.active {
+      color: var(--black);
+      position: relative;
+    }
+
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0.25rem;
+      left: 1rem;
+      right: 1rem;
+      height: 2px;
+      background: var(--terracotta);
+    }
+
+    /* Main Content */
+    main {
+      padding: 1.5rem 1.25rem;
+      padding-bottom: calc(5rem + var(--safe-bottom));
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Day Header */
+    .day-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .day-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .day-subtitle {
+      font-size: 0.9375rem;
+      color: var(--gray);
+      font-style: italic;
+    }
+
+    /* Flight Card */
+    .flight-card {
+      background: var(--black);
+      color: var(--cream);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .flight-label {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .flight-route {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+    }
+
+    .flight-details {
+      font-size: 0.875rem;
+      color: var(--gray-light);
+    }
+
+    .flight-number {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--cream);
+    }
+
+    /* Time Block */
+    .time-block {
+      margin-bottom: 1.75rem;
+    }
+
+    .time-label {
+      font-family: var(--font-display);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--terracotta);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Place Item */
+    .place-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .place-item:last-child {
+      border-bottom: none;
+    }
+
+    .place-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .place-checkbox {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: -0.5rem;
+      cursor: pointer;
+    }
+
+    .place-checkbox input {
+      display: none;
+    }
+
+    .place-checkbox .check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--gray-light);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .place-checkbox input:checked + .check-box {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+
+    .place-checkbox input:checked + .check-box::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 6px;
+      width: 5px;
+      height: 9px;
+      border: solid var(--cream);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .place-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .place-name-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .place-name {
+      font-weight: 600;
+      font-size: 1.0625rem;
+    }
+
+    .place-item.visited .place-name {
+      color: var(--gray);
+      text-decoration: line-through;
+      text-decoration-color: var(--gray-light);
+    }
+
+    .place-backup {
+      font-size: 0.8125rem;
+      color: var(--gray);
+    }
+
+    .place-desc {
+      font-size: 0.9375rem;
+      color: var(--gray);
+      margin-top: 0.25rem;
+    }
+
+    .place-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--terracotta);
+      text-decoration: none;
+      margin-top: 0.5rem;
+      padding: 0.25rem 0;
+    }
+
+    .place-link svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* Notes */
+    .place-notes {
+      margin-top: 0.75rem;
+    }
+
+    .notes-toggle {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray);
+      background: none;
+      border: none;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .notes-toggle svg {
+      width: 10px;
+      height: 10px;
+      transition: transform 0.2s ease;
+    }
+
+    .notes-toggle.open svg {
+      transform: rotate(90deg);
+    }
+
+    .notes-textarea {
+      width: 100%;
+      min-height: 60px;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--black);
+      background: var(--cream-dark);
+      border: none;
+      resize: vertical;
+      display: none;
+    }
+
+    .notes-textarea.open {
+      display: block;
+    }
+
+    .notes-textarea:focus {
+      outline: 2px solid var(--terracotta);
+      outline-offset: -2px;
+    }
+
+    /* Reservations */
+    .reservations-section {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+
+    .reservation-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      gap: 1rem;
+    }
+
+    .reservation-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .reservation-name {
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+
+    .reservation-when {
+      font-size: 0.8125rem;
+      color: var(--gray);
+    }
+
+    .reservation-status {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 0.75rem;
+      border: none;
+      cursor: pointer;
+      min-width: 90px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .reservation-status.pending {
+      background: var(--amber);
+      color: white;
+    }
+
+    .reservation-status.confirmed {
+      background: var(--green);
+      color: white;
+    }
+
+    .reservation-status.not-needed {
+      background: transparent;
+      color: var(--gray);
+      border: 1px solid var(--gray-light);
+    }
+
+    /* Shopping Tab */
+    .shopping-btn {
+      position: fixed;
+      bottom: calc(1.5rem + var(--safe-bottom));
+      right: 1.25rem;
+      width: 56px;
+      height: 56px;
+      background: var(--black);
+      color: var(--cream);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease, background 0.2s ease;
+      z-index: 100;
+    }
+
+    .shopping-btn:active {
+      transform: scale(0.95);
+    }
+
+    .shopping-btn.active {
+      background: var(--terracotta);
+    }
+
+    .shopping-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Shopping Panel */
+    .shopping-panel {
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 99;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      overflow-y: auto;
+      padding: calc(1.5rem + var(--safe-top)) 1.25rem calc(1.5rem + var(--safe-bottom));
+    }
+
+    .shopping-panel.open {
+      transform: translateY(0);
+    }
+
+    .shopping-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .shopping-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .shopping-subtitle {
+      font-size: 0.9375rem;
+      color: var(--gray);
+      font-style: italic;
+    }
+
+    .shopping-close {
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: -0.5rem;
+    }
+
+    .shopping-close svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .shop-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .shop-day {
+      font-family: var(--font-display);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--terracotta);
+      margin-bottom: 0.25rem;
+    }
+
+    .shop-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.125rem;
+    }
+
+    .shop-desc {
+      font-size: 0.875rem;
+      color: var(--gray);
+    }
+
+    /* Overview Panel */
+    .overview-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .overview-day {
+      background: var(--cream-dark);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .overview-day:active {
+      background: #D4CFBE;
+    }
+
+    .overview-day-name {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--terracotta);
+      margin-bottom: 0.25rem;
+    }
+
+    .overview-day-title {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .overview-day-highlights {
+      font-size: 0.875rem;
+      color: var(--gray);
+    }
+
+    /* Offline indicator */
+    .offline-banner {
+      position: fixed;
+      top: var(--safe-top);
+      left: 0;
+      right: 0;
+      background: var(--terracotta);
+      color: white;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: center;
+      padding: 0.5rem;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+      z-index: 200;
+    }
+
+    .offline-banner.show {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-banner" id="offlineBanner">Offline Mode</div>
+
+  <header>
+    <div class="header-top">
+      <h1>CDMX</h1>
+      <a href="https://maps.google.com/?q=Casa+Ofelia+Polanco+Anatole+France+129+Mexico+City" class="hotel-link" target="_blank" rel="noopener">Casa Ofelia →</a>
+    </div>
+    <p class="dates">January 15–19, 2025</p>
+  </header>
+
+  <nav>
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-panel="overview">Overview</button>
+      <button class="tab" data-panel="thu">Thu</button>
+      <button class="tab" data-panel="fri">Fri</button>
+      <button class="tab" data-panel="sat">Sat</button>
+      <button class="tab" data-panel="sun">Sun</button>
+      <button class="tab" data-panel="mon">Mon</button>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- Overview Panel -->
+    <section class="panel active" id="panel-overview">
+      <div class="overview-grid">
+        <div class="overview-day" data-goto="thu">
+          <div class="overview-day-name">Thursday</div>
+          <div class="overview-day-title">Arrival</div>
+          <div class="overview-day-highlights">Land at MEX, Polanquito walk, Ticuchi dinner</div>
+        </div>
+        <div class="overview-day" data-goto="fri">
+          <div class="overview-day-name">Friday</div>
+          <div class="overview-day-title">Anthropología + Roma</div>
+          <div class="overview-day-highlights">Museum, Contramar, Roma wandering, Rosetta</div>
+        </div>
+        <div class="overview-day" data-goto="sat">
+          <div class="overview-day-name">Saturday</div>
+          <div class="overview-day-title">Market Day + South</div>
+          <div class="overview-day-highlights">Bazar Sábado, San Ángel, Coyoacán, Pujol</div>
+        </div>
+        <div class="overview-day" data-goto="sun">
+          <div class="overview-day-name">Sunday</div>
+          <div class="overview-day-title">Centro + Condesa</div>
+          <div class="overview-day-highlights">Zócalo, Bellas Artes, markets, Condesa stroll</div>
+        </div>
+        <div class="overview-day" data-goto="mon">
+          <div class="overview-day-name">Monday</div>
+          <div class="overview-day-title">Departure</div>
+          <div class="overview-day-highlights">Panadería Rosetta, airport</div>
+        </div>
+      </div>
+
+      <div class="reservations-section">
+        <h2 class="section-title">Reservations</h2>
+        <div id="reservations-overview"></div>
+      </div>
+    </section>
+
+    <!-- Thursday Panel -->
+    <section class="panel" id="panel-thu">
+      <div class="day-header">
+        <h2 class="day-title">Thursday, Jan 15</h2>
+        <p class="day-subtitle">Arrival Day</p>
+      </div>
+
+      <div class="flight-card">
+        <div class="flight-label">Outbound Flight</div>
+        <div class="flight-route">MIA → MEX</div>
+        <div class="flight-details">
+          <span class="flight-number">Delta 7945</span> · 1:00pm – 3:55pm
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">4:00 PM</div>
+        <div class="place-item" data-id="thu-airport">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Land at MEX, taxi to hotel</div>
+              <p class="place-desc">~45 min ride to Polanco</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">6:00 PM</div>
+        <div class="place-item" data-id="thu-polanquito">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Walk Polanquito & Parque Lincoln</div>
+              <p class="place-desc">Evening stroll through the neighborhood</p>
+              <a href="https://maps.google.com/?q=Parque+Lincoln+Polanco+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+        <div class="place-item" data-id="thu-lago">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Lago Algo</div>
+              <p class="place-desc">Contemporary art gallery</p>
+              <a href="https://maps.google.com/?q=Lago+Algo+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">8:30 PM</div>
+        <div class="place-item" data-id="thu-dinner">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name-row">
+                <span class="place-name">Ticuchi</span>
+                <span class="place-backup">(backup: Entremar)</span>
+              </div>
+              <p class="place-desc">Dinner</p>
+              <a href="https://maps.google.com/?q=Ticuchi+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Friday Panel -->
+    <section class="panel" id="panel-fri">
+      <div class="day-header">
+        <h2 class="day-title">Friday, Jan 16</h2>
+        <p class="day-subtitle">Anthropología + Roma</p>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">9:30 AM</div>
+        <div class="place-item" data-id="fri-museo">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Museo de Antropología</div>
+              <p class="place-desc">2–3 hours. Don't miss the Aztec and Maya halls</p>
+              <a href="https://maps.google.com/?q=Museo+Nacional+de+Antropologia+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">1:00 PM</div>
+        <div class="place-item" data-id="fri-contramar">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Contramar</div>
+              <p class="place-desc">No reservations—arrive when doors open</p>
+              <a href="https://maps.google.com/?q=Contramar+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">3:00 PM</div>
+        <div class="place-item" data-id="fri-roma">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Roma Wandering</div>
+              <p class="place-desc">Plaza Río de Janeiro, neighborhood stroll</p>
+              <a href="https://maps.google.com/?q=Plaza+Rio+de+Janeiro+Roma+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="place-item" data-id="fri-casabosques">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Casa Bosques</div>
+              <p class="place-desc">Bookstore & design objects</p>
+              <a href="https://maps.google.com/?q=Casa+Bosques+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+        <div class="place-item" data-id="fri-originario">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Originario</div>
+              <p class="place-desc">Home goods, textiles, ceramics</p>
+              <a href="https://maps.google.com/?q=Originario+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+        <div class="place-item" data-id="fri-medellin">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Mercado Medellín</div>
+              <p class="place-desc">Local market, great for snacks</p>
+              <a href="https://maps.google.com/?q=Mercado+Medellin+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="place-item" data-id="fri-cafedenadie">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Café de Nadie</div>
+              <p class="place-desc">Coffee break</p>
+              <a href="https://maps.google.com/?q=Cafe+de+Nadie+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="place-item" data-id="fri-extras">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name-row">
+                <span class="place-name">Also nearby</span>
+              </div>
+              <p class="place-desc">Somsaa, Helados Cometa</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">8:30 PM</div>
+        <div class="place-item" data-id="fri-dinner">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name-row">
+                <span class="place-name">Rosetta</span>
+                <span class="place-backup">(backups: Maximo Bistrot, Blanco Colima)</span>
+              </div>
+              <p class="place-desc">Dinner</p>
+              <a href="https://maps.google.com/?q=Rosetta+Restaurant+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Saturday Panel -->
+    <section class="panel" id="panel-sat">
+      <div class="day-header">
+        <h2 class="day-title">Saturday, Jan 17</h2>
+        <p class="day-subtitle">Market Day + South</p>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">9:00 AM</div>
+        <div class="place-item" data-id="sat-bazar">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Bazar Sábado</div>
+              <p class="place-desc">THE Saturday artisan market — folk art, silver, ceramics, textiles</p>
+              <a href="https://maps.google.com/?q=Bazar+Sabado+San+Angel+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">1:30 PM</div>
+        <div class="place-item" data-id="sat-sanangel">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">San Ángel Inn</div>
+              <p class="place-desc">Lunch in a historic hacienda</p>
+              <a href="https://maps.google.com/?q=San+Angel+Inn+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">3:00 PM</div>
+        <div class="place-item" data-id="sat-frida">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Frida Kahlo Museum</div>
+              <p class="place-desc">Requires advance tickets — buy online NOW</p>
+              <a href="https://maps.google.com/?q=Museo+Frida+Kahlo+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+        <div class="place-item" data-id="sat-coyoacan">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Coyoacán Plazas</div>
+              <p class="place-desc">Wander the colorful neighborhood</p>
+              <a href="https://maps.google.com/?q=Jardin+Centenario+Coyoacan+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">8:30 PM</div>
+        <div class="place-item" data-id="sat-dinner">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name-row">
+                <span class="place-name">Pujol</span>
+                <span class="place-backup">(backup: Quintonil)</span>
+              </div>
+              <p class="place-desc">Big dinner — book NOW</p>
+              <a href="https://maps.google.com/?q=Pujol+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sunday Panel -->
+    <section class="panel" id="panel-sun">
+      <div class="day-header">
+        <h2 class="day-title">Sunday, Jan 18</h2>
+        <p class="day-subtitle">Centro + Condesa</p>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">9:30 AM</div>
+        <div class="place-item" data-id="sun-bellas">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Palacio de Bellas Artes</div>
+              <p class="place-desc">Art nouveau/deco masterpiece</p>
+              <a href="https://maps.google.com/?q=Palacio+de+Bellas+Artes+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="place-item" data-id="sun-correos">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Palacio de Correos</div>
+              <p class="place-desc">Stunning post office building</p>
+              <a href="https://maps.google.com/?q=Palacio+de+Correos+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="place-item" data-id="sun-zocalo">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Zócalo</div>
+              <p class="place-desc">Main square, massive flag</p>
+              <a href="https://maps.google.com/?q=Zocalo+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="place-item" data-id="sun-nacional">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Palacio Nacional</div>
+              <p class="place-desc">Diego Rivera murals — free, bring ID</p>
+              <a href="https://maps.google.com/?q=Palacio+Nacional+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+        <div class="place-item" data-id="sun-templo">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Templo Mayor</div>
+              <p class="place-desc">Aztec ruins in the city center</p>
+              <a href="https://maps.google.com/?q=Templo+Mayor+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="place-item" data-id="sun-catedral">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Catedral Metropolitana</div>
+              <p class="place-desc">Largest cathedral in the Americas</p>
+              <a href="https://maps.google.com/?q=Catedral+Metropolitana+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">1:00 PM</div>
+        <div class="place-item" data-id="sun-ciudadela">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Mercado Ciudadela</div>
+              <p class="place-desc">Artisan market — talavera, alebrijes, leather, gifts</p>
+              <a href="https://maps.google.com/?q=Mercado+de+la+Ciudadela+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+        <div class="place-item" data-id="sun-lunch">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name-row">
+                <span class="place-name">Limosneros</span>
+                <span class="place-backup">(backup: Círculo Mexicano rooftop)</span>
+              </div>
+              <p class="place-desc">Lunch</p>
+              <a href="https://maps.google.com/?q=Limosneros+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">4:00 PM</div>
+        <div class="place-item" data-id="sun-parque">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Parque México</div>
+              <p class="place-desc">Art deco park in Condesa</p>
+              <a href="https://maps.google.com/?q=Parque+Mexico+Condesa+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="place-item" data-id="sun-rufina">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Rufina</div>
+              <p class="place-desc">Pottery</p>
+              <a href="https://maps.google.com/?q=Rufina+Ceramica+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+        <div class="place-item" data-id="sun-mooni">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Mooni</div>
+              <p class="place-desc">Gallery / design</p>
+              <a href="https://maps.google.com/?q=Mooni+Gallery+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+        <div class="place-item" data-id="sun-fabrica">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Fábrica Social</div>
+              <p class="place-desc">Plants & crafts</p>
+              <a href="https://maps.google.com/?q=Fabrica+Social+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+        <div class="place-item" data-id="sun-coffee">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name-row">
+                <span class="place-name">Coffee: Quentin or Hule</span>
+              </div>
+              <p class="place-desc">Afternoon pick-me-up</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">7:00 PM</div>
+        <div class="place-item" data-id="sun-drinks">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name-row">
+                <span class="place-name">Baltra</span>
+                <span class="place-backup">(backup: Condesa DF rooftop)</span>
+              </div>
+              <p class="place-desc">Pre-dinner drinks</p>
+              <a href="https://maps.google.com/?q=Baltra+Bar+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">8:30 PM</div>
+        <div class="place-item" data-id="sun-dinner">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name-row">
+                <span class="place-name">Pasillo de Humo</span>
+                <span class="place-backup">(backups: Lardo, Expendio de Maíz)</span>
+              </div>
+              <p class="place-desc">Dinner</p>
+              <a href="https://maps.google.com/?q=Pasillo+de+Humo+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Monday Panel -->
+    <section class="panel" id="panel-mon">
+      <div class="day-header">
+        <h2 class="day-title">Monday, Jan 19</h2>
+        <p class="day-subtitle">Departure Day</p>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">8:00 AM</div>
+        <div class="place-item" data-id="mon-breakfast">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Panadería Rosetta</div>
+              <p class="place-desc">Breakfast pastries & coffee</p>
+              <a href="https://maps.google.com/?q=Panaderia+Rosetta+Mexico+City" class="place-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Map
+              </a>
+            </div>
+          </div>
+          <div class="place-notes">
+            <button class="notes-toggle" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              Notes
+            </button>
+            <textarea class="notes-textarea" placeholder="Add notes..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-label">9:00 AM</div>
+        <div class="place-item" data-id="mon-airport">
+          <div class="place-header">
+            <label class="place-checkbox">
+              <input type="checkbox">
+              <span class="check-box"></span>
+            </label>
+            <div class="place-content">
+              <div class="place-name">Head to airport</div>
+              <p class="place-desc">~45 min to MEX</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flight-card">
+        <div class="flight-label">Return Flight</div>
+        <div class="flight-route">MEX → MIA</div>
+        <div class="flight-details">
+          <span class="flight-number">Delta 9116</span> · 11:00am – 3:22pm
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shopping Button -->
+  <button class="shopping-btn" id="shoppingBtn" aria-label="Shopping list for Beana">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 0 1-8 0"/>
+    </svg>
+  </button>
+
+  <!-- Shopping Panel -->
+  <div class="shopping-panel" id="shoppingPanel">
+    <div class="shopping-header">
+      <div>
+        <h2 class="shopping-title">Shopping</h2>
+        <p class="shopping-subtitle">For Beana</p>
+      </div>
+      <button class="shopping-close" id="shoppingClose" aria-label="Close shopping list">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="shop-item">
+      <div class="shop-day">Thursday</div>
+      <div class="shop-name">Lago Algo</div>
+      <div class="shop-desc">Contemporary art</div>
+    </div>
+
+    <div class="shop-item">
+      <div class="shop-day">Friday</div>
+      <div class="shop-name">Casa Bosques</div>
+      <div class="shop-desc">Books, design objects</div>
+    </div>
+
+    <div class="shop-item">
+      <div class="shop-day">Friday</div>
+      <div class="shop-name">Originario</div>
+      <div class="shop-desc">Textiles, ceramics</div>
+    </div>
+
+    <div class="shop-item">
+      <div class="shop-day">Saturday</div>
+      <div class="shop-name">Bazar Sábado</div>
+      <div class="shop-desc">Folk art, silver, ceramics, textiles</div>
+    </div>
+
+    <div class="shop-item">
+      <div class="shop-day">Sunday</div>
+      <div class="shop-name">Mercado Ciudadela</div>
+      <div class="shop-desc">Talavera, alebrijes, leather, gifts</div>
+    </div>
+
+    <div class="shop-item">
+      <div class="shop-day">Sunday</div>
+      <div class="shop-name">Rufina</div>
+      <div class="shop-desc">Pottery</div>
+    </div>
+
+    <div class="shop-item">
+      <div class="shop-day">Sunday</div>
+      <div class="shop-name">Mooni</div>
+      <div class="shop-desc">Gallery / design</div>
+    </div>
+
+    <div class="shop-item">
+      <div class="shop-day">Sunday</div>
+      <div class="shop-name">Fábrica Social</div>
+      <div class="shop-desc">Plants, crafts</div>
+    </div>
+  </div>
+
+  <script>
+    // State management
+    const state = {
+      visited: JSON.parse(localStorage.getItem('cdmx-visited') || '{}'),
+      notes: JSON.parse(localStorage.getItem('cdmx-notes') || '{}'),
+      reservations: JSON.parse(localStorage.getItem('cdmx-reservations') || '{}')
+    };
+
+    // Default reservations
+    const defaultReservations = {
+      'pujol': { name: 'Pujol or Quintonil', when: 'Saturday dinner', status: 'pending' },
+      'rosetta': { name: 'Rosetta', when: 'Friday dinner', status: 'pending' },
+      'frida': { name: 'Frida Kahlo Museum', when: 'Saturday afternoon', status: 'pending' },
+      'ticuchi': { name: 'Ticuchi', when: 'Thursday dinner (optional)', status: 'not-needed' }
+    };
+
+    // Initialize reservations
+    Object.keys(defaultReservations).forEach(key => {
+      if (!state.reservations[key]) {
+        state.reservations[key] = defaultReservations[key];
+      }
+    });
+
+    function saveState() {
+      localStorage.setItem('cdmx-visited', JSON.stringify(state.visited));
+      localStorage.setItem('cdmx-notes', JSON.stringify(state.notes));
+      localStorage.setItem('cdmx-reservations', JSON.stringify(state.reservations));
+    }
+
+    // Tab navigation
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.panel');
+
+    function switchTab(panelId) {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      
+      const targetTab = document.querySelector(`.tab[data-panel="${panelId}"]`);
+      const targetPanel = document.getElementById(`panel-${panelId}`);
+      
+      if (targetTab) targetTab.classList.add('active');
+      if (targetPanel) targetPanel.classList.add('active');
+      
+      // Scroll tab into view
+      if (targetTab) {
+        targetTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => switchTab(tab.dataset.panel));
+    });
+
+    // Overview day cards
+    document.querySelectorAll('.overview-day').forEach(card => {
+      card.addEventListener('click', () => switchTab(card.dataset.goto));
+    });
+
+    // Checkboxes
+    document.querySelectorAll('.place-item').forEach(item => {
+      const id = item.dataset.id;
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      
+      if (checkbox && id) {
+        checkbox.checked = state.visited[id] || false;
+        if (checkbox.checked) item.classList.add('visited');
+        
+        checkbox.addEventListener('change', () => {
+          state.visited[id] = checkbox.checked;
+          item.classList.toggle('visited', checkbox.checked);
+          saveState();
+        });
+      }
+    });
+
+    // Notes toggles
+    document.querySelectorAll('.notes-toggle').forEach(toggle => {
+      const textarea = toggle.nextElementSibling;
+      const item = toggle.closest('.place-item');
+      const id = item?.dataset.id;
+      
+      if (id && state.notes[id]) {
+        textarea.value = state.notes[id];
+      }
+      
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('open');
+        textarea.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', textarea.classList.contains('open'));
+        if (textarea.classList.contains('open')) {
+          textarea.focus();
+        }
+      });
+      
+      textarea.addEventListener('input', () => {
+        if (id) {
+          state.notes[id] = textarea.value;
+          saveState();
+        }
+      });
+    });
+
+    // Reservations
+    function renderReservations() {
+      const container = document.getElementById('reservations-overview');
+      container.innerHTML = '';
+      
+      Object.entries(state.reservations).forEach(([key, res]) => {
+        const item = document.createElement('div');
+        item.className = 'reservation-item';
+        item.innerHTML = `
+          <div class="reservation-info">
+            <div class="reservation-name">${res.name}</div>
+            <div class="reservation-when">${res.when}</div>
+          </div>
+          <button class="reservation-status ${res.status}" data-key="${key}">
+            ${res.status === 'pending' ? 'Pending' : res.status === 'confirmed' ? 'Confirmed' : 'Not Needed'}
+          </button>
+        `;
+        container.appendChild(item);
+      });
+      
+      // Add click handlers
+      container.querySelectorAll('.reservation-status').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.dataset.key;
+          const statuses = ['pending', 'confirmed', 'not-needed'];
+          const currentIndex = statuses.indexOf(state.reservations[key].status);
+          const nextIndex = (currentIndex + 1) % statuses.length;
+          state.reservations[key].status = statuses[nextIndex];
+          saveState();
+          renderReservations();
+        });
+      });
+    }
+
+    renderReservations();
+
+    // Shopping panel
+    const shoppingBtn = document.getElementById('shoppingBtn');
+    const shoppingPanel = document.getElementById('shoppingPanel');
+    const shoppingClose = document.getElementById('shoppingClose');
+
+    shoppingBtn.addEventListener('click', () => {
+      shoppingPanel.classList.add('open');
+      shoppingBtn.classList.add('active');
+    });
+
+    shoppingClose.addEventListener('click', () => {
+      shoppingPanel.classList.remove('open');
+      shoppingBtn.classList.remove('active');
+    });
+
+    // Offline detection
+    const offlineBanner = document.getElementById('offlineBanner');
+
+    function updateOnlineStatus() {
+      if (!navigator.onLine) {
+        offlineBanner.classList.add('show');
+      } else {
+        offlineBanner.classList.remove('show');
+      }
+    }
+
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+    updateOnlineStatus();
+
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(err => {
+        console.log('SW registration failed:', err);
+      });
+    }
+  </script>
+</body>
+</html>
