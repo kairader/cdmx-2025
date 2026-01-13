@@ -2,7 +2,7 @@
   "name": "CDMX Trip — January 2025",
   "short_name": "CDMX",
   "description": "Travel itinerary for Mexico City, January 15-19, 2025",
-  "start_url": ".",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#E8E3D7",
   "theme_color": "#E8E3D7",
