@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cdmx-trip-v3';
+const CACHE_NAME = 'cdmx-trip-v4';
 const ASSETS = [
   './',
   './index.html',
