@@ -1,8 +1,8 @@
-const CACHE_NAME = 'cdmx-trip-v1';
+const CACHE_NAME = 'cdmx-trip-v2';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  './',
+  './index.html',
+  './manifest.json',
   'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap'
 ];
 
@@ -67,7 +67,7 @@ self.addEventListener('fetch', event => {
           .catch(() => {
             // Offline fallback for navigation requests
             if (event.request.mode === 'navigate') {
-              return caches.match('/index.html');
+              return caches.match('./index.html');
             }
           });
       })
