@@ -299,14 +299,39 @@
       gap: 0.75rem;
     }
 
-    .place-thumb {
-      width: 96px;
-      height: 96px;
-      border-radius: 4px;
-      object-fit: cover;
+    .image-stack {
+      position: relative;
+      width: 128px;
+      height: 128px;
       flex-shrink: 0;
-      order: 1;
-      margin-left: auto;
+    }
+
+    .image-stack img {
+      position: absolute;
+      width: 128px;
+      height: 128px;
+      border-radius: 6px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+      cursor: grab;
+    }
+
+    .image-stack img:active {
+      cursor: grabbing;
+    }
+
+    /* Stack effect - cards behind with playful rotation */
+    .image-stack img.stack-1 { z-index: 5; transform: rotate(0deg); }
+    .image-stack img.stack-2 { z-index: 4; transform: rotate(3deg) translate(3px, 2px); }
+    .image-stack img.stack-3 { z-index: 3; transform: rotate(-2deg) translate(-2px, 3px); }
+    .image-stack img.stack-4 { z-index: 2; transform: rotate(2deg) translate(2px, -2px); opacity: 0.7; }
+    .image-stack img.stack-5 { z-index: 1; transform: rotate(-3deg) translate(-3px, -1px); opacity: 0.5; }
+
+    /* Swipe animation */
+    .image-stack img.swiping-out {
+      transform: translateX(-100px) rotate(-10deg);
+      opacity: 0;
     }
 
     .place-checkbox {
@@ -318,6 +343,8 @@
       justify-content: center;
       margin: -0.5rem;
       cursor: pointer;
+      order: 1;
+      margin-left: auto;
     }
 
     .place-checkbox input {
@@ -687,7 +714,13 @@
         <div class="time-label">Late Afternoon</div>
         <div class="place-item" data-id="thu-settle">
           <div class="place-header">
-            <img src="images/parque-lincoln.jpg" alt="Parque Lincoln" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/parque-lincoln-1.jpg" alt="Parque Lincoln" class="stack-1" loading="lazy">
+              <img src="images/parque-lincoln-2.jpg" alt="Parque Lincoln" class="stack-2" loading="lazy">
+              <img src="images/parque-lincoln-3.jpg" alt="Parque Lincoln" class="stack-3" loading="lazy">
+              <img src="images/parque-lincoln-4.jpg" alt="Parque Lincoln" class="stack-4" loading="lazy">
+              <img src="images/parque-lincoln-5.jpg" alt="Parque Lincoln" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -712,7 +745,13 @@
         <div class="time-label">7:00 PM</div>
         <div class="place-item" data-id="thu-dinner">
           <div class="place-header">
-            <img src="images/ticuchi.jpg" alt="Ticuchi" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/ticuchi-1.jpg" alt="Ticuchi" class="stack-1" loading="lazy">
+              <img src="images/ticuchi-2.jpg" alt="Ticuchi" class="stack-2" loading="lazy">
+              <img src="images/ticuchi-3.jpg" alt="Ticuchi" class="stack-3" loading="lazy">
+              <img src="images/ticuchi-4.jpg" alt="Ticuchi" class="stack-4" loading="lazy">
+              <img src="images/ticuchi-5.jpg" alt="Ticuchi" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -750,7 +789,13 @@
         <div class="time-label">9:30 AM</div>
         <div class="place-item" data-id="fri-museo">
           <div class="place-header">
-            <img src="images/museo-antropologia.jpg" alt="Museo de Antropología" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/museo-antropologia-1.jpg" alt="Museo de Antropología" class="stack-1" loading="lazy">
+              <img src="images/museo-antropologia-2.jpg" alt="Museo de Antropología" class="stack-2" loading="lazy">
+              <img src="images/museo-antropologia-3.jpg" alt="Museo de Antropología" class="stack-3" loading="lazy">
+              <img src="images/museo-antropologia-4.jpg" alt="Museo de Antropología" class="stack-4" loading="lazy">
+              <img src="images/museo-antropologia-5.jpg" alt="Museo de Antropología" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -777,7 +822,13 @@
         <div class="time-label">1:00 PM</div>
         <div class="place-item" data-id="fri-expendio">
           <div class="place-header">
-            <img src="images/expendio-maiz.jpg" alt="Expendio de Maíz" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/expendio-maiz-1.jpg" alt="Expendio de Maíz" class="stack-1" loading="lazy">
+              <img src="images/expendio-maiz-2.jpg" alt="Expendio de Maíz" class="stack-2" loading="lazy">
+              <img src="images/expendio-maiz-3.jpg" alt="Expendio de Maíz" class="stack-3" loading="lazy">
+              <img src="images/expendio-maiz-4.jpg" alt="Expendio de Maíz" class="stack-4" loading="lazy">
+              <img src="images/expendio-maiz-5.jpg" alt="Expendio de Maíz" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -802,7 +853,13 @@
         <div class="time-label">Afternoon</div>
         <div class="place-item" data-id="fri-roma">
           <div class="place-header">
-            <img src="images/plaza-rio-janeiro.jpg" alt="Roma" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/plaza-rio-janeiro-1.jpg" alt="Plaza Río de Janeiro" class="stack-1" loading="lazy">
+              <img src="images/plaza-rio-janeiro-2.jpg" alt="Plaza Río de Janeiro" class="stack-2" loading="lazy">
+              <img src="images/plaza-rio-janeiro-3.jpg" alt="Plaza Río de Janeiro" class="stack-3" loading="lazy">
+              <img src="images/plaza-rio-janeiro-4.jpg" alt="Plaza Río de Janeiro" class="stack-4" loading="lazy">
+              <img src="images/plaza-rio-janeiro-5.jpg" alt="Plaza Río de Janeiro" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -823,7 +880,13 @@
         </div>
         <div class="place-item" data-id="fri-casabosques">
           <div class="place-header">
-            <img src="images/casa-bosques.jpg" alt="Casa Bosques" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/casa-bosques-1.jpg" alt="Casa Bosques" class="stack-1" loading="lazy">
+              <img src="images/casa-bosques-2.jpg" alt="Casa Bosques" class="stack-2" loading="lazy">
+              <img src="images/casa-bosques-3.jpg" alt="Casa Bosques" class="stack-3" loading="lazy">
+              <img src="images/casa-bosques-4.jpg" alt="Casa Bosques" class="stack-4" loading="lazy">
+              <img src="images/casa-bosques-5.jpg" alt="Casa Bosques" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -844,7 +907,13 @@
         </div>
         <div class="place-item" data-id="fri-originario">
           <div class="place-header">
-            <img src="images/originario.jpg" alt="Originario" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/originario-1.jpg" alt="Originario" class="stack-1" loading="lazy">
+              <img src="images/originario-2.jpg" alt="Originario" class="stack-2" loading="lazy">
+              <img src="images/originario-3.jpg" alt="Originario" class="stack-3" loading="lazy">
+              <img src="images/originario-4.jpg" alt="Originario" class="stack-4" loading="lazy">
+              <img src="images/originario-5.jpg" alt="Originario" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -865,7 +934,13 @@
         </div>
         <div class="place-item" data-id="fri-medellin">
           <div class="place-header">
-            <img src="images/mercado-medellin.jpg" alt="Mercado Medellín" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/mercado-medellin-1.jpg" alt="Mercado Medellín" class="stack-1" loading="lazy">
+              <img src="images/mercado-medellin-2.jpg" alt="Mercado Medellín" class="stack-2" loading="lazy">
+              <img src="images/mercado-medellin-3.jpg" alt="Mercado Medellín" class="stack-3" loading="lazy">
+              <img src="images/mercado-medellin-4.jpg" alt="Mercado Medellín" class="stack-4" loading="lazy">
+              <img src="images/mercado-medellin-5.jpg" alt="Mercado Medellín" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -944,7 +1019,13 @@
         <div class="time-label">Morning</div>
         <div class="place-item" data-id="sat-bellas">
           <div class="place-header">
-            <img src="images/bellas-artes.jpg" alt="Palacio de Bellas Artes" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/bellas-artes-1.jpg" alt="Palacio de Bellas Artes" class="stack-1" loading="lazy">
+              <img src="images/bellas-artes-2.jpg" alt="Palacio de Bellas Artes" class="stack-2" loading="lazy">
+              <img src="images/bellas-artes-3.jpg" alt="Palacio de Bellas Artes" class="stack-3" loading="lazy">
+              <img src="images/bellas-artes-4.jpg" alt="Palacio de Bellas Artes" class="stack-4" loading="lazy">
+              <img src="images/bellas-artes-5.jpg" alt="Palacio de Bellas Artes" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -965,7 +1046,13 @@
         </div>
         <div class="place-item" data-id="sat-correos">
           <div class="place-header">
-            <img src="images/palacio-correos.jpg" alt="Palacio de Correos" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/palacio-correos-1.jpg" alt="Palacio de Correos" class="stack-1" loading="lazy">
+              <img src="images/palacio-correos-2.jpg" alt="Palacio de Correos" class="stack-2" loading="lazy">
+              <img src="images/palacio-correos-3.jpg" alt="Palacio de Correos" class="stack-3" loading="lazy">
+              <img src="images/palacio-correos-4.jpg" alt="Palacio de Correos" class="stack-4" loading="lazy">
+              <img src="images/palacio-correos-5.jpg" alt="Palacio de Correos" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -986,7 +1073,13 @@
         </div>
         <div class="place-item" data-id="sat-zocalo">
           <div class="place-header">
-            <img src="images/zocalo.jpg" alt="Zócalo" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/zocalo-1.jpg" alt="Zócalo" class="stack-1" loading="lazy">
+              <img src="images/zocalo-2.jpg" alt="Zócalo" class="stack-2" loading="lazy">
+              <img src="images/zocalo-3.jpg" alt="Zócalo" class="stack-3" loading="lazy">
+              <img src="images/zocalo-4.jpg" alt="Zócalo" class="stack-4" loading="lazy">
+              <img src="images/zocalo-5.jpg" alt="Zócalo" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1007,7 +1100,13 @@
         </div>
         <div class="place-item" data-id="sat-nacional">
           <div class="place-header">
-            <img src="images/palacio-nacional.jpg" alt="Palacio Nacional" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/palacio-nacional-1.jpg" alt="Palacio Nacional" class="stack-1" loading="lazy">
+              <img src="images/palacio-nacional-2.jpg" alt="Palacio Nacional" class="stack-2" loading="lazy">
+              <img src="images/palacio-nacional-3.jpg" alt="Palacio Nacional" class="stack-3" loading="lazy">
+              <img src="images/palacio-nacional-4.jpg" alt="Palacio Nacional" class="stack-4" loading="lazy">
+              <img src="images/palacio-nacional-5.jpg" alt="Palacio Nacional" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1028,7 +1127,13 @@
         </div>
         <div class="place-item" data-id="sat-templo">
           <div class="place-header">
-            <img src="images/templo-mayor.jpg" alt="Templo Mayor" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/templo-mayor-1.jpg" alt="Templo Mayor" class="stack-1" loading="lazy">
+              <img src="images/templo-mayor-2.jpg" alt="Templo Mayor" class="stack-2" loading="lazy">
+              <img src="images/templo-mayor-3.jpg" alt="Templo Mayor" class="stack-3" loading="lazy">
+              <img src="images/templo-mayor-4.jpg" alt="Templo Mayor" class="stack-4" loading="lazy">
+              <img src="images/templo-mayor-5.jpg" alt="Templo Mayor" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1049,7 +1154,13 @@
         </div>
         <div class="place-item" data-id="sat-catedral">
           <div class="place-header">
-            <img src="images/catedral-metropolitana.jpg" alt="Catedral Metropolitana" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/catedral-metropolitana-1.jpg" alt="Catedral Metropolitana" class="stack-1" loading="lazy">
+              <img src="images/catedral-metropolitana-2.jpg" alt="Catedral Metropolitana" class="stack-2" loading="lazy">
+              <img src="images/catedral-metropolitana-3.jpg" alt="Catedral Metropolitana" class="stack-3" loading="lazy">
+              <img src="images/catedral-metropolitana-4.jpg" alt="Catedral Metropolitana" class="stack-4" loading="lazy">
+              <img src="images/catedral-metropolitana-5.jpg" alt="Catedral Metropolitana" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1074,7 +1185,13 @@
         <div class="time-label">Late Morning</div>
         <div class="place-item" data-id="sat-merced">
           <div class="place-header">
-            <img src="images/la-merced.jpg" alt="La Merced" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/la-merced-1.jpg" alt="La Merced" class="stack-1" loading="lazy">
+              <img src="images/la-merced-2.jpg" alt="La Merced" class="stack-2" loading="lazy">
+              <img src="images/la-merced-3.jpg" alt="La Merced" class="stack-3" loading="lazy">
+              <img src="images/la-merced-4.jpg" alt="La Merced" class="stack-4" loading="lazy">
+              <img src="images/la-merced-5.jpg" alt="La Merced" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1101,7 +1218,13 @@
         <div class="time-label">Afternoon</div>
         <div class="place-item" data-id="sat-parque">
           <div class="place-header">
-            <img src="images/parque-mexico.jpg" alt="Parque México" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/parque-mexico-1.jpg" alt="Parque México" class="stack-1" loading="lazy">
+              <img src="images/parque-mexico-2.jpg" alt="Parque México" class="stack-2" loading="lazy">
+              <img src="images/parque-mexico-3.jpg" alt="Parque México" class="stack-3" loading="lazy">
+              <img src="images/parque-mexico-4.jpg" alt="Parque México" class="stack-4" loading="lazy">
+              <img src="images/parque-mexico-5.jpg" alt="Parque México" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1122,7 +1245,13 @@
         </div>
         <div class="place-item" data-id="sat-rufina">
           <div class="place-header">
-            <img src="images/rufina.jpg" alt="Rufina" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/rufina-1.jpg" alt="Rufina" class="stack-1" loading="lazy">
+              <img src="images/rufina-2.jpg" alt="Rufina" class="stack-2" loading="lazy">
+              <img src="images/rufina-3.jpg" alt="Rufina" class="stack-3" loading="lazy">
+              <img src="images/rufina-4.jpg" alt="Rufina" class="stack-4" loading="lazy">
+              <img src="images/rufina-5.jpg" alt="Rufina" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1143,7 +1272,13 @@
         </div>
         <div class="place-item" data-id="sat-mooni">
           <div class="place-header">
-            <img src="images/mooni.jpg" alt="Mooni" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/mooni-1.jpg" alt="Mooni" class="stack-1" loading="lazy">
+              <img src="images/mooni-2.jpg" alt="Mooni" class="stack-2" loading="lazy">
+              <img src="images/mooni-3.jpg" alt="Mooni" class="stack-3" loading="lazy">
+              <img src="images/mooni-4.jpg" alt="Mooni" class="stack-4" loading="lazy">
+              <img src="images/mooni-5.jpg" alt="Mooni" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1164,7 +1299,13 @@
         </div>
         <div class="place-item" data-id="sat-fabrica">
           <div class="place-header">
-            <img src="images/fabrica-social.jpg" alt="Fábrica Social" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/fabrica-social-1.jpg" alt="Fábrica Social" class="stack-1" loading="lazy">
+              <img src="images/fabrica-social-2.jpg" alt="Fábrica Social" class="stack-2" loading="lazy">
+              <img src="images/fabrica-social-3.jpg" alt="Fábrica Social" class="stack-3" loading="lazy">
+              <img src="images/fabrica-social-4.jpg" alt="Fábrica Social" class="stack-4" loading="lazy">
+              <img src="images/fabrica-social-5.jpg" alt="Fábrica Social" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1189,7 +1330,13 @@
         <div class="time-label">5:15 PM</div>
         <div class="place-item" data-id="sat-dinner">
           <div class="place-header">
-            <img src="images/lardo.jpg" alt="Lardo" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/lardo-1.jpg" alt="Lardo" class="stack-1" loading="lazy">
+              <img src="images/lardo-2.jpg" alt="Lardo" class="stack-2" loading="lazy">
+              <img src="images/lardo-3.jpg" alt="Lardo" class="stack-3" loading="lazy">
+              <img src="images/lardo-4.jpg" alt="Lardo" class="stack-4" loading="lazy">
+              <img src="images/lardo-5.jpg" alt="Lardo" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1271,7 +1418,13 @@
         <div class="time-label">Dinner</div>
         <div class="place-item" data-id="sun-dinner">
           <div class="place-header">
-            <img src="images/comedor-jacinta.jpg" alt="Comedor Jacinta" class="place-thumb" loading="lazy">
+            <div class="image-stack">
+              <img src="images/comedor-jacinta-1.jpg" alt="Comedor Jacinta" class="stack-1" loading="lazy">
+              <img src="images/comedor-jacinta-2.jpg" alt="Comedor Jacinta" class="stack-2" loading="lazy">
+              <img src="images/comedor-jacinta-3.jpg" alt="Comedor Jacinta" class="stack-3" loading="lazy">
+              <img src="images/comedor-jacinta-4.jpg" alt="Comedor Jacinta" class="stack-4" loading="lazy">
+              <img src="images/comedor-jacinta-5.jpg" alt="Comedor Jacinta" class="stack-5" loading="lazy">
+            </div>
             <label class="place-checkbox">
               <input type="checkbox">
               <span class="check-box"></span>
@@ -1479,6 +1632,75 @@
         console.log('SW registration failed:', err);
       });
     }
+
+    // Image stack swipe handling
+    document.querySelectorAll('.image-stack').forEach(stack => {
+      const images = stack.querySelectorAll('img');
+      if (images.length === 0) return;
+
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+
+      function rotateStack() {
+        const imageArray = Array.from(images);
+        // Move first image to end of visual stack
+        const first = imageArray.find(img => img.classList.contains('stack-1'));
+        if (!first) return;
+
+        // Animate out
+        first.classList.add('swiping-out');
+
+        setTimeout(() => {
+          // Rotate classes
+          images.forEach(img => {
+            if (img.classList.contains('stack-1')) {
+              img.classList.remove('stack-1');
+              img.classList.add('stack-5');
+            } else if (img.classList.contains('stack-2')) {
+              img.classList.remove('stack-2');
+              img.classList.add('stack-1');
+            } else if (img.classList.contains('stack-3')) {
+              img.classList.remove('stack-3');
+              img.classList.add('stack-2');
+            } else if (img.classList.contains('stack-4')) {
+              img.classList.remove('stack-4');
+              img.classList.add('stack-3');
+            } else if (img.classList.contains('stack-5')) {
+              img.classList.remove('stack-5');
+              img.classList.add('stack-4');
+            }
+            img.classList.remove('swiping-out');
+          });
+        }, 150);
+      }
+
+      stack.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      }, { passive: true });
+
+      stack.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX;
+      }, { passive: true });
+
+      stack.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const diff = startX - currentX;
+        if (Math.abs(diff) > 30) {
+          rotateStack();
+        }
+      });
+
+      // Click/tap to cycle as well
+      stack.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG') {
+          rotateStack();
+        }
+      });
+    });
   </script>
 </body>
 </html>
