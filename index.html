@@ -25,6 +25,16 @@
       --font-body: 'Source Serif 4', Georgia, serif;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
+      /* Custom easing curves */
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+      /* Typography scale */
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.25rem;
+      --text-xl: 1.5rem;
+      --text-2xl: 2rem;
     }
 
     * {
@@ -63,7 +73,7 @@
 
     h1 {
       font-family: var(--font-display);
-      font-size: 2.5rem;
+      font-size: var(--text-2xl);
       font-weight: 700;
       letter-spacing: 0.02em;
       text-transform: uppercase;
@@ -73,7 +83,7 @@
 
     .hotel-link {
       font-family: var(--font-display);
-      font-size: 0.75rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -85,7 +95,7 @@
 
     .dates {
       font-family: var(--font-display);
-      font-size: 0.875rem;
+      font-size: var(--text-sm);
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -107,14 +117,14 @@
 
     .tabs {
       display: flex;
-      gap: 0.25rem;
-      padding: 0 1.25rem;
+      gap: 0;
+      padding: 0 0.25rem 0 1.25rem;
       min-width: max-content;
     }
 
     .tab {
       font-family: var(--font-display);
-      font-size: 0.875rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -123,16 +133,16 @@
       border: none;
       color: var(--gray);
       cursor: pointer;
-      transition: color 0.2s ease;
+      transition: color 0.2s var(--ease-out-expo);
       white-space: nowrap;
-    }
-
-    .tab.active {
-      color: var(--black);
       position: relative;
     }
 
-    .tab.active::after {
+    .tab:first-child {
+      padding-left: 0;
+    }
+
+    .tab::after {
       content: '';
       position: absolute;
       bottom: 0.25rem;
@@ -140,6 +150,16 @@
       right: 1rem;
       height: 2px;
       background: var(--terracotta);
+      transform: scaleX(0);
+      transition: transform 0.2s var(--ease-out-expo);
+    }
+
+    .tab.active {
+      color: var(--black);
+    }
+
+    .tab.active::after {
+      transform: scaleX(1);
     }
 
     main {
@@ -153,12 +173,12 @@
 
     .panel.active {
       display: block;
-      animation: fadeIn 0.2s ease-out;
+      animation: fadeIn 0.25s var(--ease-out-expo);
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
 
     .day-header {
@@ -167,7 +187,7 @@
 
     .day-title {
       font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: var(--text-xl);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.02em;
@@ -176,7 +196,7 @@
     }
 
     .day-subtitle {
-      font-size: 0.9375rem;
+      font-size: var(--text-sm);
       color: var(--gray);
       font-style: italic;
     }
@@ -190,7 +210,7 @@
 
     .flight-label {
       font-family: var(--font-display);
-      font-size: 0.6875rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -200,14 +220,14 @@
 
     .flight-route {
       font-family: var(--font-display);
-      font-size: 1.75rem;
+      font-size: var(--text-xl);
       font-weight: 700;
       letter-spacing: 0.04em;
       margin-bottom: 0.25rem;
     }
 
     .flight-details {
-      font-size: 0.875rem;
+      font-size: var(--text-sm);
       color: var(--gray-light);
     }
 
@@ -226,7 +246,7 @@
 
     .event-label {
       font-family: var(--font-display);
-      font-size: 0.6875rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -236,7 +256,7 @@
 
     .event-title {
       font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: var(--text-xl);
       font-weight: 700;
       letter-spacing: 0.02em;
       margin-bottom: 0.25rem;
@@ -244,7 +264,7 @@
     }
 
     .event-details {
-      font-size: 0.875rem;
+      font-size: var(--text-sm);
       opacity: 0.9;
     }
 
@@ -253,7 +273,7 @@
       align-items: center;
       gap: 0.25rem;
       font-family: var(--font-display);
-      font-size: 0.75rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -276,7 +296,7 @@
 
     .time-label {
       font-family: var(--font-display);
-      font-size: 0.8125rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -285,18 +305,13 @@
     }
 
     .place-item {
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
-    .place-item:last-child {
-      border-bottom: none;
+      padding: 1.25rem 0;
     }
 
     .place-header {
       display: flex;
       align-items: flex-start;
-      gap: 0.75rem;
+      gap: 1rem;
     }
 
     .image-stack {
@@ -313,7 +328,7 @@
       border-radius: 6px;
       object-fit: cover;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+      transition: transform 0.3s var(--ease-out-back), filter 0.25s var(--ease-out-expo);
       cursor: grab;
     }
 
@@ -322,58 +337,15 @@
     }
 
     /* Stack effect - cards behind with playful rotation */
-    .image-stack img.stack-1 { z-index: 5; transform: rotate(0deg); }
-    .image-stack img.stack-2 { z-index: 4; transform: rotate(3deg) translate(3px, 2px); }
-    .image-stack img.stack-3 { z-index: 3; transform: rotate(-2deg) translate(-2px, 3px); }
-    .image-stack img.stack-4 { z-index: 2; transform: rotate(2deg) translate(2px, -2px); opacity: 0.7; }
-    .image-stack img.stack-5 { z-index: 1; transform: rotate(-3deg) translate(-3px, -1px); opacity: 0.5; }
+    .image-stack img.stack-1 { z-index: 5; transform: rotate(0deg) scale(1); }
+    .image-stack img.stack-2 { z-index: 4; transform: rotate(3deg) translate(3px, 2px) scale(0.98); }
+    .image-stack img.stack-3 { z-index: 3; transform: rotate(-2deg) translate(-2px, 3px) scale(0.96); }
+    .image-stack img.stack-4 { z-index: 2; transform: rotate(2deg) translate(2px, -2px) scale(0.94); }
+    .image-stack img.stack-5 { z-index: 1; transform: rotate(-3deg) translate(-3px, -1px) scale(0.92); }
 
     /* Swipe animation */
     .image-stack img.swiping-out {
-      transform: translateX(-100px) rotate(-10deg);
-      opacity: 0;
-    }
-
-    .place-checkbox {
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: -0.5rem;
-      cursor: pointer;
-      order: 1;
-      margin-left: auto;
-    }
-
-    .place-checkbox input {
-      display: none;
-    }
-
-    .place-checkbox .check-box {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--gray-light);
-      transition: all 0.2s ease;
-      position: relative;
-    }
-
-    .place-checkbox input:checked + .check-box {
-      background: var(--terracotta);
-      border-color: var(--terracotta);
-    }
-
-    .place-checkbox input:checked + .check-box::after {
-      content: '';
-      position: absolute;
-      top: 3px;
-      left: 6px;
-      width: 5px;
-      height: 9px;
-      border: solid var(--cream);
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
+      transform: translateX(-80px) rotate(-8deg) scale(0.95);
     }
 
     .place-content {
@@ -390,18 +362,12 @@
 
     .place-name {
       font-weight: 600;
-      font-size: 1.0625rem;
-    }
-
-    .place-item.visited .place-name {
-      color: var(--gray);
-      text-decoration: line-through;
-      text-decoration-color: var(--gray-light);
+      font-size: var(--text-base);
     }
 
     .place-tag {
       font-family: var(--font-display);
-      font-size: 0.625rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -411,7 +377,7 @@
     }
 
     .place-desc {
-      font-size: 0.9375rem;
+      font-size: var(--text-sm);
       color: var(--gray);
       margin-top: 0.25rem;
     }
@@ -421,15 +387,18 @@
       align-items: center;
       gap: 0.25rem;
       font-family: var(--font-display);
-      font-size: 0.75rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--terracotta);
       text-decoration: none;
-      margin-top: 0.5rem;
-      margin-right: 1.25rem;
+      margin-right: 1rem;
       padding: 0.25rem 0;
+    }
+
+    .place-link:first-of-type {
+      margin-top: 0.5rem;
     }
 
     .place-link svg {
@@ -439,17 +408,15 @@
 
     .neighborhood-label {
       font-family: var(--font-display);
-      font-size: 0.6875rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--gray);
       margin-bottom: 0.75rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
-    .shopping-btn {
+    .history-btn {
       position: fixed;
       bottom: calc(1.5rem + var(--safe-bottom));
       right: 1.25rem;
@@ -463,85 +430,112 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      transition: transform 0.2s ease, background 0.2s ease;
+      transition: transform 0.2s var(--ease-out-expo), background 0.2s var(--ease-out-expo);
       z-index: 100;
     }
 
-    .shopping-btn:active {
+    .history-btn:active {
       transform: scale(0.95);
     }
 
-    .shopping-btn.active {
+    .history-btn.active {
       background: var(--terracotta);
     }
 
-    .shopping-btn svg {
+    .history-btn svg {
       width: 24px;
       height: 24px;
+      transition: transform 0.25s var(--ease-out-back);
     }
 
-    .shopping-panel {
+    .history-btn .icon-close {
+      position: absolute;
+      transform: rotate(45deg) scale(0);
+    }
+
+    .history-btn.active .icon-book {
+      transform: rotate(-45deg) scale(0);
+    }
+
+    .history-btn.active .icon-close {
+      transform: rotate(0) scale(1);
+    }
+
+    .history-panel {
       position: fixed;
       inset: 0;
       background: var(--cream);
       z-index: 99;
       transform: translateY(100%);
-      transition: transform 0.2s ease-out;
+      transition: transform 0.3s var(--ease-spring);
       overflow-y: auto;
       padding: calc(1.5rem + var(--safe-top)) 1.25rem calc(1.5rem + var(--safe-bottom));
     }
 
-    .shopping-panel.open {
+    .history-panel.open {
       transform: translateY(0);
     }
 
-    .shopping-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.5rem;
-    }
 
-    .shopping-title {
-      font-family: var(--font-display);
-      font-size: 1.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      text-wrap: balance;
-    }
-
-    .shopping-subtitle {
-      font-size: 0.9375rem;
-      color: var(--gray);
-      font-style: italic;
-    }
-
-    .shopping-close {
-      width: 44px;
-      height: 44px;
-      background: none;
-      border: none;
-      cursor: pointer;
+    /* History Browse View */
+    .history-browse {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: -0.5rem;
+      min-height: calc(100dvh - var(--safe-top) - var(--safe-bottom) - 3rem);
     }
 
-    .shopping-close svg {
-      width: 24px;
-      height: 24px;
+    .history-browse.hidden {
+      display: none;
     }
 
-    .shop-item {
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+    .era-cards {
+      position: relative;
+      width: 100%;
+      height: calc(100dvh - var(--safe-top) - var(--safe-bottom) - 6rem);
+      max-height: 600px;
     }
 
-    .shop-day {
+    .era-card {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      cursor: pointer;
+      transition: transform 0.35s var(--ease-out-back);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .era-card.card-1 { z-index: 4; transform: rotate(0deg); }
+    .era-card.card-2 { z-index: 3; transform: rotate(2.5deg) translate(6px, 8px); }
+    .era-card.card-3 { z-index: 2; transform: rotate(-2deg) translate(-5px, 14px); }
+    .era-card.card-4 { z-index: 1; transform: rotate(3.5deg) translate(8px, 20px); }
+
+    .era-card.swiping {
+      transform: translateX(-100px) rotate(-5deg) !important;
+    }
+
+    .era-card-image {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .era-card-content {
+      padding: 1rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .era-card-dates {
       font-family: var(--font-display);
-      font-size: 0.6875rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -549,15 +543,133 @@
       margin-bottom: 0.25rem;
     }
 
-    .shop-name {
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 0.125rem;
+    .era-card-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.5rem;
     }
 
-    .shop-desc {
-      font-size: 0.875rem;
+    .era-card-teaser {
+      font-size: var(--text-sm);
       color: var(--gray);
+      line-height: 1.4;
+    }
+
+    .era-card-arrow {
+      margin-top: auto;
+      padding-top: 1rem;
+      color: var(--terracotta);
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .era-card-arrow svg {
+      width: 24px;
+      height: 24px;
+    }
+
+
+    /* History Detail View */
+    .history-detail {
+      display: none;
+    }
+
+    .history-detail.active {
+      display: block;
+      animation: fadeIn 0.3s var(--ease-out-expo);
+    }
+
+    .detail-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--terracotta);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem 0;
+      margin-bottom: 1rem;
+    }
+
+    .detail-back svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .detail-image {
+      width: calc(100% + 2.5rem);
+      margin-left: -1.25rem;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 1.25rem;
+    }
+
+    .detail-dates {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--terracotta);
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .detail-content {
+      font-size: var(--text-base);
+      line-height: 1.7;
+      color: var(--black);
+    }
+
+    .detail-content p {
+      margin-bottom: 1rem;
+    }
+
+    .detail-content strong {
+      font-weight: 600;
+    }
+
+    .related-places {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .related-places-title {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray);
+      margin-bottom: 0.75rem;
+    }
+
+    .related-place-link {
+      display: block;
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--terracotta);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      cursor: pointer;
     }
 
     .overview-grid {
@@ -569,7 +681,7 @@
       background: var(--cream-dark);
       padding: 1.25rem;
       cursor: pointer;
-      transition: background 0.2s ease;
+      transition: background 0.2s var(--ease-out-expo);
     }
 
     .overview-day:active {
@@ -578,7 +690,7 @@
 
     .overview-day-name {
       font-family: var(--font-display);
-      font-size: 0.75rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -588,7 +700,7 @@
 
     .overview-day-title {
       font-family: var(--font-display);
-      font-size: 1.125rem;
+      font-size: var(--text-lg);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.02em;
@@ -597,7 +709,7 @@
     }
 
     .overview-day-highlights {
-      font-size: 0.875rem;
+      font-size: var(--text-sm);
       color: var(--gray);
     }
 
@@ -609,19 +721,31 @@
       background: var(--terracotta);
       color: white;
       font-family: var(--font-display);
-      font-size: 0.75rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       text-align: center;
       padding: 0.5rem;
       transform: translateY(-100%);
-      transition: transform 0.2s ease-out;
+      transition: transform 0.25s var(--ease-out-expo);
       z-index: 200;
     }
 
     .offline-banner.show {
       transform: translateY(0);
+    }
+
+    /* Accessibility: Respect reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
@@ -698,11 +822,7 @@
         <div class="time-label">~4:00 PM</div>
         <div class="place-item" data-id="thu-arrive">
           <div class="place-header">
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Land at MEX, taxi to hotel</div>
               <p class="place-desc">~45 min ride to Polanco</p>
             </div>
@@ -721,11 +841,7 @@
               <img src="images/parque-lincoln-4.jpg" alt="Parque Lincoln" class="stack-4" loading="lazy">
               <img src="images/parque-lincoln-5.jpg" alt="Parque Lincoln" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Settle in, casual Polanco exploring</div>
               <p class="place-desc">Depending on energy — Parque Lincoln, Polanquito</p>
               <a href="https://maps.google.com/?q=Parque+Lincoln+Polanco+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -752,11 +868,7 @@
               <img src="images/ticuchi-4.jpg" alt="Ticuchi" class="stack-4" loading="lazy">
               <img src="images/ticuchi-5.jpg" alt="Ticuchi" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name-row">
                 <span class="place-name">Ticuchi</span>
                 <span class="place-tag">Reserved</span>
@@ -796,11 +908,7 @@
               <img src="images/museo-antropologia-4.jpg" alt="Museo de Antropología" class="stack-4" loading="lazy">
               <img src="images/museo-antropologia-5.jpg" alt="Museo de Antropología" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Museo de Antropología</div>
               <p class="place-desc">2–3 hours. Don't miss the Aztec and Maya halls</p>
               <a href="https://maps.google.com/?q=Museo+Nacional+de+Antropologia+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -829,11 +937,7 @@
               <img src="images/expendio-maiz-4.jpg" alt="Expendio de Maíz" class="stack-4" loading="lazy">
               <img src="images/expendio-maiz-5.jpg" alt="Expendio de Maíz" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Expendio de Maíz</div>
               <p class="place-desc">Corn-focused, no menu — trust the kitchen</p>
               <a href="https://maps.google.com/?q=Expendio+de+Maiz+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -860,11 +964,7 @@
               <img src="images/plaza-rio-janeiro-4.jpg" alt="Plaza Río de Janeiro" class="stack-4" loading="lazy">
               <img src="images/plaza-rio-janeiro-5.jpg" alt="Plaza Río de Janeiro" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Roma Wandering</div>
               <p class="place-desc">Plaza Río de Janeiro, neighborhood stroll</p>
               <a href="https://maps.google.com/?q=Plaza+Rio+de+Janeiro+Roma+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -887,11 +987,7 @@
               <img src="images/casa-bosques-4.jpg" alt="Casa Bosques" class="stack-4" loading="lazy">
               <img src="images/casa-bosques-5.jpg" alt="Casa Bosques" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Casa Bosques</div>
               <p class="place-desc">Bookstore & design objects</p>
               <a href="https://maps.google.com/?q=Casa+Bosques+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -914,11 +1010,7 @@
               <img src="images/originario-4.jpg" alt="Originario" class="stack-4" loading="lazy">
               <img src="images/originario-5.jpg" alt="Originario" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Originario</div>
               <p class="place-desc">Home goods, textiles, ceramics</p>
               <a href="https://maps.google.com/?q=Originario+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -941,11 +1033,7 @@
               <img src="images/mercado-medellin-4.jpg" alt="Mercado Medellín" class="stack-4" loading="lazy">
               <img src="images/mercado-medellin-5.jpg" alt="Mercado Medellín" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Mercado Medellín</div>
               <p class="place-desc">Local market, great for snacks</p>
               <a href="https://maps.google.com/?q=Mercado+Medellin+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -961,11 +1049,7 @@
         </div>
         <div class="place-item" data-id="fri-extras">
           <div class="place-header">
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Also nearby</div>
               <p class="place-desc">Café de Nadie, Somsaa, Helados Cometa</p>
             </div>
@@ -979,11 +1063,7 @@
         <div class="time-label">~6:00 PM</div>
         <div class="place-item" data-id="fri-quickbite">
           <div class="place-header">
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Quick bite near hotel</div>
               <p class="place-desc">Grab tacos before the match</p>
             </div>
@@ -1026,11 +1106,7 @@
               <img src="images/bellas-artes-4.jpg" alt="Palacio de Bellas Artes" class="stack-4" loading="lazy">
               <img src="images/bellas-artes-5.jpg" alt="Palacio de Bellas Artes" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Palacio de Bellas Artes</div>
               <p class="place-desc">Art nouveau/deco masterpiece</p>
               <a href="https://maps.google.com/?q=Palacio+de+Bellas+Artes+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1053,11 +1129,7 @@
               <img src="images/palacio-correos-4.jpg" alt="Palacio de Correos" class="stack-4" loading="lazy">
               <img src="images/palacio-correos-5.jpg" alt="Palacio de Correos" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Palacio de Correos</div>
               <p class="place-desc">Stunning post office building</p>
               <a href="https://maps.google.com/?q=Palacio+de+Correos+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1080,11 +1152,7 @@
               <img src="images/zocalo-4.jpg" alt="Zócalo" class="stack-4" loading="lazy">
               <img src="images/zocalo-5.jpg" alt="Zócalo" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Zócalo</div>
               <p class="place-desc">Main square, massive flag</p>
               <a href="https://maps.google.com/?q=Zocalo+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1107,11 +1175,7 @@
               <img src="images/palacio-nacional-4.jpg" alt="Palacio Nacional" class="stack-4" loading="lazy">
               <img src="images/palacio-nacional-5.jpg" alt="Palacio Nacional" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Palacio Nacional</div>
               <p class="place-desc">Diego Rivera murals — free, bring ID</p>
               <a href="https://maps.google.com/?q=Palacio+Nacional+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1134,11 +1198,7 @@
               <img src="images/templo-mayor-4.jpg" alt="Templo Mayor" class="stack-4" loading="lazy">
               <img src="images/templo-mayor-5.jpg" alt="Templo Mayor" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Templo Mayor</div>
               <p class="place-desc">Aztec ruins in the city center</p>
               <a href="https://maps.google.com/?q=Templo+Mayor+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1161,11 +1221,7 @@
               <img src="images/catedral-metropolitana-4.jpg" alt="Catedral Metropolitana" class="stack-4" loading="lazy">
               <img src="images/catedral-metropolitana-5.jpg" alt="Catedral Metropolitana" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Catedral Metropolitana</div>
               <p class="place-desc">Largest cathedral in the Americas</p>
               <a href="https://maps.google.com/?q=Catedral+Metropolitana+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1192,11 +1248,7 @@
               <img src="images/la-merced-4.jpg" alt="La Merced" class="stack-4" loading="lazy">
               <img src="images/la-merced-5.jpg" alt="La Merced" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">La Merced</div>
               <p class="place-desc">One of the oldest & largest markets — graze here for lunch</p>
               <a href="https://maps.google.com/?q=Mercado+de+la+Merced+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1225,11 +1277,7 @@
               <img src="images/parque-mexico-4.jpg" alt="Parque México" class="stack-4" loading="lazy">
               <img src="images/parque-mexico-5.jpg" alt="Parque México" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Parque México</div>
               <p class="place-desc">Art deco park, neighborhood heart</p>
               <a href="https://maps.google.com/?q=Parque+Mexico+Condesa+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1252,11 +1300,7 @@
               <img src="images/rufina-4.jpg" alt="Rufina" class="stack-4" loading="lazy">
               <img src="images/rufina-5.jpg" alt="Rufina" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Rufina</div>
               <p class="place-desc">Pottery</p>
               <a href="https://maps.google.com/?q=Rufina+Ceramica+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1279,11 +1323,7 @@
               <img src="images/mooni-4.jpg" alt="Mooni" class="stack-4" loading="lazy">
               <img src="images/mooni-5.jpg" alt="Mooni" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Mooni</div>
               <p class="place-desc">Gallery / design</p>
               <a href="https://maps.google.com/?q=Mooni+Gallery+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1306,11 +1346,7 @@
               <img src="images/fabrica-social-4.jpg" alt="Fábrica Social" class="stack-4" loading="lazy">
               <img src="images/fabrica-social-5.jpg" alt="Fábrica Social" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Fábrica Social</div>
               <p class="place-desc">Plants & crafts</p>
               <a href="https://maps.google.com/?q=Fabrica+Social+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1337,11 +1373,7 @@
               <img src="images/lardo-4.jpg" alt="Lardo" class="stack-4" loading="lazy">
               <img src="images/lardo-5.jpg" alt="Lardo" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name-row">
                 <span class="place-name">Lardo</span>
                 <span class="place-tag">Reserved</span>
@@ -1386,11 +1418,7 @@
         <div class="time-label">Early Afternoon</div>
         <div class="place-item" data-id="sun-return">
           <div class="place-header">
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Return to city, rest at hotel</div>
               <p class="place-desc">Recharge after the early morning</p>
             </div>
@@ -1402,11 +1430,7 @@
         <div class="time-label">Late Afternoon</div>
         <div class="place-item" data-id="sun-coffee">
           <div class="place-header">
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Coffee & light exploring</div>
               <p class="place-desc">Keep it chill — Polanco or nearby</p>
             </div>
@@ -1425,11 +1449,7 @@
               <img src="images/comedor-jacinta-4.jpg" alt="Comedor Jacinta" class="stack-4" loading="lazy">
               <img src="images/comedor-jacinta-5.jpg" alt="Comedor Jacinta" class="stack-5" loading="lazy">
             </div>
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Comedor Jacinta</div>
               <p class="place-desc">Home-style Mexican, Bib Gourmand — in Polanquito</p>
               <a href="https://maps.google.com/?q=Comedor+Jacinta+Mexico+City" class="place-link" target="_blank" rel="noopener">
@@ -1457,11 +1477,7 @@
         <div class="time-label">~6:30 AM</div>
         <div class="place-item" data-id="mon-coffee">
           <div class="place-header">
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Quick coffee & pastry</div>
               <p class="place-desc">Grab something near the hotel</p>
             </div>
@@ -1473,11 +1489,7 @@
         <div class="time-label">~7:00 AM</div>
         <div class="place-item" data-id="mon-depart">
           <div class="place-header">
-            <label class="place-checkbox">
-              <input type="checkbox">
-              <span class="check-box"></span>
-            </label>
-            <div class="place-content">
+                        <div class="place-content">
               <div class="place-name">Head to airport</div>
               <p class="place-desc">~45 min to MEX, arrive by 8am</p>
             </div>
@@ -1495,68 +1507,169 @@
     </section>
   </main>
 
-  <button class="shopping-btn" id="shoppingBtn" aria-label="Shopping list for Beana">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-      <line x1="3" y1="6" x2="21" y2="6"/>
-      <path d="M16 10a4 4 0 0 1-8 0"/>
+  <button class="history-btn" id="historyBtn" aria-label="History guide">
+    <svg class="icon-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      <line x1="8" y1="7" x2="16" y2="7"/>
+      <line x1="8" y1="11" x2="14" y2="11"/>
+    </svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
     </svg>
   </button>
 
-  <div class="shopping-panel" id="shoppingPanel">
-    <div class="shopping-header">
-      <div>
-        <h2 class="shopping-title">Shopping</h2>
-        <p class="shopping-subtitle">For Beana</p>
+  <div class="history-panel" id="historyPanel">
+    <!-- Browse View -->
+    <div class="history-browse" id="historyBrowse">
+      <div class="era-cards" id="eraCards">
+        <div class="era-card card-1" data-era="prehispanic">
+          <img src="images/history/prehispanic.jpg" alt="Pre-Hispanic Mexico" class="era-card-image">
+          <div class="era-card-content">
+            <div class="era-card-dates">1325 – 1521</div>
+            <h3 class="era-card-title">Pre-Hispanic</h3>
+            <p class="era-card-teaser">The Aztec capital Tenochtitlan rose from the lake, becoming one of the world's largest cities.</p>
+            <div class="era-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </div>
+
+        <div class="era-card card-2" data-era="colonial">
+          <img src="images/history/colonial.jpg" alt="Colonial Mexico" class="era-card-image">
+          <div class="era-card-content">
+            <div class="era-card-dates">1521 – 1821</div>
+            <h3 class="era-card-title">Colonial</h3>
+            <p class="era-card-teaser">Three centuries of Spanish rule transformed the city into the "City of Palaces."</p>
+            <div class="era-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </div>
+
+        <div class="era-card card-3" data-era="independence">
+          <img src="images/history/independence.jpg" alt="Independence Era Mexico" class="era-card-image">
+          <div class="era-card-content">
+            <div class="era-card-dates">1821 – 1910</div>
+            <h3 class="era-card-title">Independence & Reform</h3>
+            <p class="era-card-teaser">A new nation emerged through revolution, reform, and the reign of Porfirio Díaz.</p>
+            <div class="era-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </div>
+
+        <div class="era-card card-4" data-era="modern">
+          <img src="images/history/modern.jpg" alt="Modern Mexico City" class="era-card-image">
+          <div class="era-card-content">
+            <div class="era-card-dates">1910 – Present</div>
+            <h3 class="era-card-title">Revolution & Modern</h3>
+            <p class="era-card-teaser">From muralism to megacity, Mexico City became a cultural capital of the Americas.</p>
+            <div class="era-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </div>
       </div>
-      <button class="shopping-close" id="shoppingClose" aria-label="Close shopping list">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
+    </div>
+
+    <!-- Detail Views -->
+    <div class="history-detail" id="detail-prehispanic">
+      <button class="detail-back" id="backFromPrehispanic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
       </button>
+      <img src="images/history/prehispanic.jpg" alt="Pre-Hispanic Mexico" class="detail-image">
+      <div class="detail-dates">1325 – 1521</div>
+      <h2 class="detail-title">Pre-Hispanic Era</h2>
+      <div class="detail-content">
+        <p>According to legend, the Aztecs (or Mexica) wandered for generations seeking a sign from their god Huitzilopochtli: an eagle perched on a cactus, devouring a serpent. In 1325, they found this omen on an island in Lake Texcoco and founded <strong>Tenochtitlan</strong> — the site of modern Mexico City.</p>
+
+        <p>Within two centuries, Tenochtitlan grew into one of the world's largest cities, home to over 200,000 people. The Aztecs built an engineering marvel: causeways connected the island to the mainland, aqueducts brought fresh water, and chinampas (floating gardens) provided abundant food. The <strong>Templo Mayor</strong>, a massive twin pyramid, dominated the sacred precinct at the city's heart.</p>
+
+        <p>The Aztec Empire expanded through military conquest and tribute, controlling much of central Mexico. Their sophisticated society included a complex calendar, hieroglyphic writing, and remarkable artistic traditions. Markets like Tlatelolco amazed Spanish observers — larger and more organized than any in Europe.</p>
+
+        <p>This world ended abruptly in 1521 when Hernán Cortés and his indigenous allies conquered Tenochtitlan after a brutal siege. The Spanish systematically dismantled the city, using its stones to build a new capital atop the ruins. Today, the <strong>Zócalo</strong> sits directly over the ancient ceremonial center, and excavations continue to reveal Aztec treasures beneath the modern streets.</p>
+      </div>
+      <div class="related-places">
+        <div class="related-places-title">See on your itinerary</div>
+        <a class="related-place-link" data-goto="sat" data-place="templo">Templo Mayor — Saturday</a>
+        <a class="related-place-link" data-goto="fri" data-place="museo">Museo de Antropología — Friday</a>
+        <a class="related-place-link" data-goto="sat" data-place="zocalo">Zócalo — Saturday</a>
+      </div>
     </div>
 
-    <div class="shop-item">
-      <div class="shop-day">Friday — Roma</div>
-      <div class="shop-name">Casa Bosques</div>
-      <div class="shop-desc">Books, design objects</div>
+    <div class="history-detail" id="detail-colonial">
+      <button class="detail-back" id="backFromColonial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <img src="images/history/colonial.jpg" alt="Colonial Mexico" class="detail-image">
+      <div class="detail-dates">1521 – 1821</div>
+      <h2 class="detail-title">Colonial Era</h2>
+      <div class="detail-content">
+        <p>After the conquest, the Spanish rebuilt Mexico City as the capital of <strong>New Spain</strong>, the crown jewel of Spain's American empire. They drained the lake system (creating the flooding problems that persist today), demolished temples, and constructed churches, palaces, and government buildings in the European style.</p>
+
+        <p>The <strong>Metropolitan Cathedral</strong>, begun in 1573 and completed over 250 years, rose on the ruins of the Templo Mayor. Its sinking foundations — visible today in its tilted towers — reflect the unstable lakebed beneath. Nearby, the <strong>Palacio Nacional</strong> stands on the site of Moctezuma's palace, now housing Diego Rivera's famous murals depicting Mexican history.</p>
+
+        <p>Colonial society was rigidly stratified: Spanish-born peninsulares at the top, then criollos (American-born Spanish), mestizos, indigenous people, and African slaves. Yet a unique Mexican culture emerged from this mixing — visible in Baroque churches that blend European and indigenous artistic traditions, in the cuisine that fused Old and New World ingredients, and in religious practices that incorporated pre-Hispanic elements.</p>
+
+        <p>By the 18th century, Mexico City was called the "City of Palaces" — one of the grandest capitals in the Americas. The <strong>Palacio de Correos</strong> and nearby colonial buildings showcase the architectural ambition of this era. But growing inequality and Enlightenment ideas planted seeds of revolution.</p>
+      </div>
+      <div class="related-places">
+        <div class="related-places-title">See on your itinerary</div>
+        <a class="related-place-link" data-goto="sat" data-place="catedral">Catedral Metropolitana — Saturday</a>
+        <a class="related-place-link" data-goto="sat" data-place="nacional">Palacio Nacional — Saturday</a>
+        <a class="related-place-link" data-goto="sat" data-place="correos">Palacio de Correos — Saturday</a>
+        <a class="related-place-link" data-goto="sat" data-place="zocalo">Zócalo — Saturday</a>
+      </div>
     </div>
 
-    <div class="shop-item">
-      <div class="shop-day">Friday — Roma</div>
-      <div class="shop-name">Originario</div>
-      <div class="shop-desc">Textiles, ceramics, home goods</div>
+    <div class="history-detail" id="detail-independence">
+      <button class="detail-back" id="backFromIndependence">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <img src="images/history/independence.jpg" alt="Independence Era Mexico" class="detail-image">
+      <div class="detail-dates">1821 – 1910</div>
+      <h2 class="detail-title">Independence & Reform</h2>
+      <div class="detail-content">
+        <p>On September 16, 1810, Father Miguel Hidalgo rang the church bell in Dolores and issued his famous <strong>Grito</strong> (cry) for independence. After 11 years of war, Mexico won independence in 1821 — but decades of instability followed. The country cycled through emperors, dictators, and 50 governments in 30 years.</p>
+
+        <p>The mid-19th century brought the <strong>Reform War</strong> and the liberal constitution of 1857, championed by Benito Juárez, Mexico's first indigenous president. His reforms separated church and state, but triggered a French intervention that briefly installed Maximilian I as emperor. The <strong>Angel of Independence</strong> monument on Paseo de la Reforma commemorates the heroes of these turbulent years.</p>
+
+        <p>Porfirio Díaz seized power in 1876 and ruled for 35 years, transforming Mexico City into a modern capital. His regime — the <strong>Porfiriato</strong> — built grand European-style boulevards, theaters, and public buildings. The <strong>Palacio de Bellas Artes</strong>, though completed later, was conceived during this era. Díaz attracted foreign investment and created a prosperous elite, but rural poverty and political repression festered beneath the gilded surface.</p>
+
+        <p>By 1910, Mexico appeared stable and modern. But the dictator had overstayed his welcome, and a stolen election sparked the revolution that would transform the nation.</p>
+      </div>
+      <div class="related-places">
+        <div class="related-places-title">See on your itinerary</div>
+        <a class="related-place-link" data-goto="sat" data-place="bellas">Palacio de Bellas Artes — Saturday</a>
+        <a class="related-place-link" data-goto="sat" data-place="nacional">Palacio Nacional — Saturday</a>
+      </div>
     </div>
 
-    <div class="shop-item">
-      <div class="shop-day">Saturday — Condesa</div>
-      <div class="shop-name">Rufina</div>
-      <div class="shop-desc">Pottery</div>
-    </div>
+    <div class="history-detail" id="detail-modern">
+      <button class="detail-back" id="backFromModern">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <img src="images/history/modern.jpg" alt="Modern Mexico City" class="detail-image">
+      <div class="detail-dates">1910 – Present</div>
+      <h2 class="detail-title">Revolution & Modern Era</h2>
+      <div class="detail-content">
+        <p>The <strong>Mexican Revolution</strong> (1910-1920) was one of the first major social upheavals of the 20th century. Figures like Pancho Villa, Emiliano Zapata, and Venustiano Carranza fought for land reform, workers' rights, and democratic government. The 1917 Constitution — still in effect today — established sweeping social protections.</p>
 
-    <div class="shop-item">
-      <div class="shop-day">Saturday — Condesa</div>
-      <div class="shop-name">Mooni</div>
-      <div class="shop-desc">Gallery / design</div>
-    </div>
+        <p>The post-revolutionary government commissioned monumental public art to forge a national identity. <strong>Diego Rivera, David Alfaro Siqueiros, and José Clemente Orozco</strong> — Los Tres Grandes — covered public buildings with murals celebrating Mexico's indigenous heritage and revolutionary ideals. Rivera's stunning works at the Palacio Nacional tell the entire story of Mexican civilization.</p>
 
-    <div class="shop-item">
-      <div class="shop-day">Saturday — Condesa</div>
-      <div class="shop-name">Fábrica Social</div>
-      <div class="shop-desc">Plants, crafts</div>
+        <p>Mexico City exploded in the 20th century, growing from 1 million in 1930 to over 21 million today. Neighborhoods like Roma and Condesa, built in the 1920s-40s, showcase Art Deco architecture and tree-lined streets. The 1985 earthquake devastated the city but sparked civic organizing that transformed Mexican politics.</p>
+
+        <p>Today's CDMX is a global cultural capital — home to world-class museums, innovative restaurants, and vibrant contemporary art scenes. The <strong>Museo de Antropología</strong> houses perhaps the world's greatest collection of pre-Columbian art. From ancient ruins to cutting-edge cuisine, the city layers 700 years of history in every neighborhood you'll explore.</p>
+      </div>
+      <div class="related-places">
+        <div class="related-places-title">See on your itinerary</div>
+        <a class="related-place-link" data-goto="sat" data-place="nacional">Palacio Nacional (Rivera murals) — Saturday</a>
+        <a class="related-place-link" data-goto="sat" data-place="bellas">Palacio de Bellas Artes — Saturday</a>
+        <a class="related-place-link" data-goto="fri" data-place="museo">Museo de Antropología — Friday</a>
+        <a class="related-place-link" data-goto="sat" data-place="parque">Parque México (Art Deco) — Saturday</a>
+      </div>
     </div>
   </div>
 
   <script>
-    const state = {
-      visited: JSON.parse(localStorage.getItem('cdmx-visited') || '{}')
-    };
-
-    function saveState() {
-      localStorage.setItem('cdmx-visited', JSON.stringify(state.visited));
-    }
-
     const tabs = document.querySelectorAll('.tab');
     const panels = document.querySelectorAll('.panel');
 
@@ -1583,34 +1696,132 @@
       card.addEventListener('click', () => switchTab(card.dataset.goto));
     });
 
-    document.querySelectorAll('.place-item').forEach(item => {
-      const id = item.dataset.id;
-      const checkbox = item.querySelector('input[type="checkbox"]');
-      
-      if (checkbox && id) {
-        checkbox.checked = state.visited[id] || false;
-        if (checkbox.checked) item.classList.add('visited');
-        
-        checkbox.addEventListener('change', () => {
-          state.visited[id] = checkbox.checked;
-          item.classList.toggle('visited', checkbox.checked);
-          saveState();
-        });
+    // History Guide
+    const historyBtn = document.getElementById('historyBtn');
+    const historyPanel = document.getElementById('historyPanel');
+    const historyBrowse = document.getElementById('historyBrowse');
+    const eraCards = document.getElementById('eraCards');
+
+    historyBtn.addEventListener('click', () => {
+      const isOpen = historyPanel.classList.contains('open');
+      if (isOpen) {
+        historyPanel.classList.remove('open');
+        historyBtn.classList.remove('active');
+        showBrowseView();
+      } else {
+        historyPanel.classList.add('open');
+        historyBtn.classList.add('active');
       }
     });
 
-    const shoppingBtn = document.getElementById('shoppingBtn');
-    const shoppingPanel = document.getElementById('shoppingPanel');
-    const shoppingClose = document.getElementById('shoppingClose');
+    function showBrowseView() {
+      historyBrowse.classList.remove('hidden');
+      document.querySelectorAll('.history-detail').forEach(d => d.classList.remove('active'));
+    }
 
-    shoppingBtn.addEventListener('click', () => {
-      shoppingPanel.classList.add('open');
-      shoppingBtn.classList.add('active');
+    function showDetailView(era) {
+      historyBrowse.classList.add('hidden');
+      document.getElementById(`detail-${era}`).classList.add('active');
+      historyPanel.scrollTop = 0;
+    }
+
+    // Back buttons
+    document.querySelectorAll('.detail-back').forEach(btn => {
+      btn.addEventListener('click', showBrowseView);
     });
 
-    shoppingClose.addEventListener('click', () => {
-      shoppingPanel.classList.remove('open');
-      shoppingBtn.classList.remove('active');
+    // Related place links - close panel and navigate
+    document.querySelectorAll('.related-place-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const goto = link.dataset.goto;
+        historyPanel.classList.remove('open');
+        historyBtn.classList.remove('active');
+        showBrowseView();
+        setTimeout(() => switchTab(goto), 100);
+      });
+    });
+
+    // Era card swipe handling
+    const cards = eraCards.querySelectorAll('.era-card');
+    let cardStartX = 0;
+    let cardStartY = 0;
+    let cardCurrentX = 0;
+    let cardIsDragging = false;
+    let cardIsHorizontal = null;
+
+    function rotateCards() {
+      const cardArray = Array.from(cards);
+      const first = cardArray.find(c => c.classList.contains('card-1'));
+      if (!first) return;
+
+      first.classList.add('swiping');
+
+      setTimeout(() => {
+        cards.forEach(card => {
+          if (card.classList.contains('card-1')) {
+            card.classList.remove('card-1');
+            card.classList.add('card-4');
+          } else if (card.classList.contains('card-2')) {
+            card.classList.remove('card-2');
+            card.classList.add('card-1');
+          } else if (card.classList.contains('card-3')) {
+            card.classList.remove('card-3');
+            card.classList.add('card-2');
+          } else if (card.classList.contains('card-4')) {
+            card.classList.remove('card-4');
+            card.classList.add('card-3');
+          }
+          card.classList.remove('swiping');
+        });
+      }, 250);
+    }
+
+    eraCards.addEventListener('touchstart', (e) => {
+      cardStartX = e.touches[0].clientX;
+      cardStartY = e.touches[0].clientY;
+      cardCurrentX = cardStartX;
+      cardIsDragging = true;
+      cardIsHorizontal = null;
+    }, { passive: true });
+
+    eraCards.addEventListener('touchmove', (e) => {
+      if (!cardIsDragging) return;
+
+      const deltaX = Math.abs(e.touches[0].clientX - cardStartX);
+      const deltaY = Math.abs(e.touches[0].clientY - cardStartY);
+
+      if (cardIsHorizontal === null && (deltaX > 10 || deltaY > 10)) {
+        cardIsHorizontal = deltaX > deltaY;
+      }
+
+      if (cardIsHorizontal) {
+        e.preventDefault();
+        cardCurrentX = e.touches[0].clientX;
+      }
+    }, { passive: false });
+
+    eraCards.addEventListener('touchend', () => {
+      if (!cardIsDragging) return;
+      cardIsDragging = false;
+
+      if (cardIsHorizontal) {
+        const diff = cardStartX - cardCurrentX;
+        if (Math.abs(diff) > 40) {
+          rotateCards();
+        }
+      }
+      cardIsHorizontal = null;
+    });
+
+    // Tap to open detail view
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Only trigger on top card, and not during swipe
+        if (card.classList.contains('card-1') && !card.classList.contains('swiping')) {
+          const era = card.dataset.era;
+          showDetailView(era);
+        }
+      });
     });
 
     const offlineBanner = document.getElementById('offlineBanner');
@@ -1639,20 +1850,18 @@
       if (images.length === 0) return;
 
       let startX = 0;
+      let startY = 0;
       let currentX = 0;
       let isDragging = false;
+      let isHorizontalSwipe = null;
 
       function rotateStack() {
-        const imageArray = Array.from(images);
-        // Move first image to end of visual stack
-        const first = imageArray.find(img => img.classList.contains('stack-1'));
+        const first = Array.from(images).find(img => img.classList.contains('stack-1'));
         if (!first) return;
 
-        // Animate out
         first.classList.add('swiping-out');
 
         setTimeout(() => {
-          // Rotate classes
           images.forEach(img => {
             if (img.classList.contains('stack-1')) {
               img.classList.remove('stack-1');
@@ -1672,26 +1881,46 @@
             }
             img.classList.remove('swiping-out');
           });
-        }, 150);
+        }, 200);
       }
 
       stack.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        currentX = startX;
         isDragging = true;
+        isHorizontalSwipe = null;
       }, { passive: true });
 
       stack.addEventListener('touchmove', (e) => {
         if (!isDragging) return;
-        currentX = e.touches[0].clientX;
-      }, { passive: true });
+
+        const deltaX = Math.abs(e.touches[0].clientX - startX);
+        const deltaY = Math.abs(e.touches[0].clientY - startY);
+
+        // Determine swipe direction on first significant movement
+        if (isHorizontalSwipe === null && (deltaX > 10 || deltaY > 10)) {
+          isHorizontalSwipe = deltaX > deltaY;
+        }
+
+        // If horizontal swipe, prevent scroll and track position
+        if (isHorizontalSwipe) {
+          e.preventDefault();
+          currentX = e.touches[0].clientX;
+        }
+      }, { passive: false });
 
       stack.addEventListener('touchend', () => {
         if (!isDragging) return;
         isDragging = false;
-        const diff = startX - currentX;
-        if (Math.abs(diff) > 30) {
-          rotateStack();
+
+        if (isHorizontalSwipe) {
+          const diff = startX - currentX;
+          if (Math.abs(diff) > 30) {
+            rotateStack();
+          }
         }
+        isHorizontalSwipe = null;
       });
 
       // Click/tap to cycle as well
